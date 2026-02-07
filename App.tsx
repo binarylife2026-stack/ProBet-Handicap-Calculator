@@ -82,51 +82,51 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans selection:bg-indigo-500 pb-12">
-      <div className="max-w-[1400px] mx-auto p-4 md:p-8 space-y-8">
+      <div className="max-w-[1200px] mx-auto p-4 md:p-8 space-y-6">
         
         {/* Responsive Header */}
-        <header className="flex flex-col sm:flex-row justify-between items-center gap-6 bg-slate-900/40 p-6 rounded-3xl border border-slate-800 backdrop-blur-md">
+        <header className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-slate-900/60 p-5 rounded-3xl border border-slate-800 backdrop-blur-md">
           <div className="text-center sm:text-left">
-            <h1 className="text-3xl font-black tracking-tightest flex items-center justify-center sm:justify-start gap-2">
-              <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent uppercase">Quantum</span>
-              <span className="text-white uppercase">Bet</span>
+            <h1 className="text-2xl font-black tracking-tightest flex items-center justify-center sm:justify-start gap-2">
+              <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-tighter">Handicap</span>
+              <span className="text-white uppercase tracking-tighter">Pro</span>
             </h1>
-            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-[0.3em] mt-1">Professional Payout Engine</p>
+            <p className="text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-1">Analytical Calculation Matrix</p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={resetAll}
-              className="group flex items-center gap-2 px-5 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-2xl transition-all active:scale-95"
-            >
-              <ResetIcon />
-              <span className="text-xs font-black uppercase tracking-widest hidden sm:inline">Reset System</span>
-            </button>
-          </div>
+          <button 
+            onClick={resetAll}
+            className="group flex items-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl transition-all active:scale-95"
+          >
+            <ResetIcon />
+            <span className="text-[10px] font-black uppercase tracking-widest">Clear Matrix</span>
+          </button>
         </header>
 
-        {/* Dashboard Control Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Control Center */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Main Controls Panel */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="bg-slate-900/60 p-8 rounded-[2rem] border border-slate-800 shadow-2xl space-y-8">
-              <div className="flex items-center justify-between gap-4">
+          {/* Controls Panel */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="bg-slate-900/80 p-6 rounded-[2rem] border border-slate-800 shadow-xl space-y-6">
+              {/* Score Adjuster */}
+              <div className="flex items-center justify-between gap-4 bg-slate-950/40 p-4 rounded-2xl border border-slate-800/50">
                 <ScoreControl label="Home" score={homeScore} setScore={setHomeScore} />
-                <div className="text-2xl font-black text-slate-700 mt-8">:</div>
+                <div className="text-xl font-black text-slate-700">:</div>
                 <ScoreControl label="Away" score={awayScore} setScore={setAwayScore} />
               </div>
 
-              <div className="space-y-4">
-                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest px-2">Handicap Format</label>
-                <div className="flex p-1.5 bg-slate-950/50 rounded-2xl border border-slate-800">
+              {/* Format Switcher */}
+              <div className="space-y-3">
+                <label className="text-[9px] font-black text-slate-500 uppercase tracking-widest px-1">Betting Logic</label>
+                <div className="flex p-1 bg-slate-950/80 rounded-xl border border-slate-800">
                   {Object.values(HandicapType).map(type => (
                     <button 
                       key={type}
                       onClick={() => setHandicapType(type)}
-                      className={`flex-1 py-3 rounded-xl font-black text-xs transition-all ${
+                      className={`flex-1 py-2.5 rounded-lg font-black text-[10px] transition-all uppercase tracking-widest ${
                         handicapType === type 
-                        ? "bg-indigo-600 text-white shadow-xl" 
+                        ? "bg-indigo-600 text-white shadow-lg" 
                         : "text-slate-500 hover:text-slate-300"
                       }`}
                     >
@@ -136,33 +136,34 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <InputGroup label="Decimal Odds" value={odds} onChange={setOdds} step={0.01} />
+              {/* Input Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                <InputGroup label="Odds" value={odds} onChange={setOdds} step={0.01} />
                 <InputGroup label="Stake ($)" value={stake} onChange={setStake} />
               </div>
             </div>
           </div>
 
-          {/* Outcome Matrix Panel */}
-          <div className="lg:col-span-8 flex flex-col">
-            <div className="flex-1 bg-slate-900/40 rounded-[2.5rem] border border-slate-800 overflow-hidden shadow-2xl flex flex-col min-h-[600px]">
+          {/* Outcome Grid */}
+          <div className="lg:col-span-8">
+            <div className="bg-slate-900/40 rounded-[2.5rem] border border-slate-800 overflow-hidden shadow-2xl flex flex-col">
               
-              <div className="px-10 py-6 border-b border-slate-800 bg-slate-950/20 flex justify-between items-center">
-                <h2 className="text-lg font-black uppercase tracking-widest text-slate-400">
-                  {handicapType} Outcome Matrix
+              <div className="px-8 py-5 border-b border-slate-800 bg-slate-950/40 flex justify-between items-center">
+                <h2 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">
+                  {handicapType} Handicap
                 </h2>
-                <div className="flex gap-4">
-                  <StatusLegend color="emerald" label="Win" />
-                  <StatusLegend color="rose" label="Loss" />
+                <div className="hidden sm:flex gap-4">
+                  <StatusLegend color="emerald" label="Yield" />
+                  <StatusLegend color="rose" label="Deficit" />
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto scroller custom-scrollbar max-h-[1000px] p-6 md:p-10">
+              <div className="flex-1 overflow-y-auto scroller custom-scrollbar max-h-[800px] p-4 sm:p-8">
                 {handicapType === HandicapType.EUROPEAN ? (
-                  /* EUROPEAN HANDICAP GRID FORMAT */
-                  <div className="grid grid-cols-1 gap-4">
+                  /* EUROPEAN HANDICAP GRID FORMAT (IMAGE MATCH) */
+                  <div className="grid grid-cols-1 gap-2.5 sm:gap-4">
                     {matrixData.map(({ line, homeRes, drawRes, awayRes }) => (
-                      <div key={line} className="grid grid-cols-3 gap-3 sm:gap-4">
+                      <div key={line} className="grid grid-cols-3 gap-2 sm:gap-4">
                         <EHCard lineStr={formatEHLine(line)} selection="W1" result={homeRes} />
                         <EHCard lineStr={formatEHLine(line)} selection="X" result={drawRes!} />
                         <EHCard lineStr={formatEHLine(line)} selection="W2" result={awayRes} />
@@ -173,16 +174,25 @@ const App: React.FC = () => {
                   /* ASIAN HANDICAP ROW FORMAT */
                   <div className="space-y-4">
                     {matrixData.map(({ line, homeRes, awayRes }, idx) => (
-                      <div key={line} className={`flex flex-col gap-4 p-6 rounded-3xl border border-slate-800/60 transition-all hover:bg-slate-800/20 ${idx % 2 === 0 ? 'bg-slate-900/20' : 'bg-transparent'}`}>
-                        <div className="flex items-center justify-between">
-                          <div className="px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-400 font-black text-sm">
-                            Line {formatAHLine(line)}
-                          </div>
+                      <div key={line} className={`flex flex-col gap-4 p-5 rounded-2xl border border-slate-800/60 transition-all hover:bg-slate-800/20 ${idx % 2 === 0 ? 'bg-slate-900/30' : 'bg-transparent'}`}>
+                        <div className="flex items-center justify-between px-1">
+                          <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+                            Spread: {formatAHLine(line)}
+                          </span>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           <AHCell label="Home" result={homeRes} />
                           <AHCell label="Away" result={awayRes} />
                         </div>
+                        
+                        {/* Split Indicator for AH */}
+                        {(Math.abs(line % 1) === 0.25 || Math.abs(line % 1) === 0.75) && (
+                           <div className="flex justify-center -mt-2">
+                             <div className="px-3 py-1 bg-indigo-500/5 rounded-lg border border-indigo-500/10 text-[7px] font-black text-slate-600 uppercase tracking-widest">
+                                Split: {formatAHLine(line - 0.25)} & {formatAHLine(line + 0.25)}
+                             </div>
+                           </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -190,18 +200,17 @@ const App: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        <footer className="text-center pt-8 text-slate-700 text-[10px] font-black uppercase tracking-[0.5em]">
-          Quantum Matrix Analysis • 2025 • High Fidelity Logic
-        </footer>
+        </section>
       </div>
 
       <style>{`
-        .scroller::-webkit-scrollbar { width: 4px; }
+        .scroller::-webkit-scrollbar { width: 3px; }
         .scroller::-webkit-scrollbar-track { background: transparent; }
-        .scroller::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 10px; }
+        .scroller::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        @media (max-width: 640px) {
+          .tabular-nums { font-variant-numeric: tabular-nums; }
+        }
       `}</style>
     </div>
   );
@@ -209,17 +218,20 @@ const App: React.FC = () => {
 
 const EHCard: React.FC<{ lineStr: string; selection: string; result: CalculationResult }> = ({ lineStr, selection, result }) => {
   const isWin = result.status === ResultStatus.WIN;
-  const colorClass = isWin 
-    ? "bg-emerald-500 text-emerald-950 border-emerald-400" 
-    : "bg-slate-800/60 text-slate-400 border-slate-700/50 hover:bg-slate-800";
+  const isLoss = result.status === ResultStatus.LOSS;
+  
+  // Design matching user image (dark grey/blue cards)
+  const baseBg = isWin ? "bg-emerald-600/20" : "bg-[#1E293B]";
+  const borderCol = isWin ? "border-emerald-500/40 shadow-lg shadow-emerald-500/5" : "border-slate-800";
+  const valCol = isWin ? "text-emerald-400" : isLoss ? "text-rose-400" : "text-white";
 
   return (
-    <div className={`flex flex-col items-center justify-center p-5 rounded-[1.5rem] border-2 transition-all cursor-default ${colorClass}`}>
-      <span className="text-[10px] sm:text-xs font-black uppercase opacity-60 tracking-tighter">
+    <div className={`flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl border transition-all hover:scale-[1.02] cursor-default ${baseBg} ${borderCol}`}>
+      <span className="text-[8px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-tight whitespace-nowrap">
         {lineStr} {selection}
       </span>
-      <span className="text-lg sm:text-xl font-black mt-1 tabular-nums">
-        {result.status === ResultStatus.WIN ? `+$${result.netProfit.toFixed(1)}` : `-$${Math.abs(result.netProfit).toFixed(0)}`}
+      <span className={`text-sm sm:text-base font-black mt-1 tabular-nums ${valCol}`}>
+        {result.netProfit >= 0 ? `+$${result.netProfit.toFixed(1)}` : `-$${Math.abs(result.netProfit).toFixed(0)}`}
       </span>
     </div>
   );
@@ -229,50 +241,58 @@ const AHCell: React.FC<{ label: string; result: CalculationResult }> = ({ label,
   const isWin = result.status === ResultStatus.WIN || result.status === ResultStatus.HALF_WIN;
   const isLoss = result.status === ResultStatus.LOSS || result.status === ResultStatus.HALF_LOSS;
   
-  const statusColor = isWin ? "text-emerald-400" : isLoss ? "text-rose-400" : "text-slate-500";
-  const badgeColor = isWin ? "bg-emerald-500/20 text-emerald-400" : isLoss ? "bg-rose-500/20 text-rose-400" : "bg-slate-800 text-slate-500";
+  const profitColor = isWin ? "text-emerald-400" : isLoss ? "text-rose-400" : "text-slate-500";
+  const badgeColor = 
+    result.status === ResultStatus.WIN ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/20" :
+    result.status === ResultStatus.HALF_WIN ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/10" :
+    result.status === ResultStatus.LOSS ? "bg-rose-500/20 text-rose-400 border-rose-500/20" :
+    result.status === ResultStatus.HALF_LOSS ? "bg-rose-500/10 text-rose-500 border-rose-500/10" :
+    "bg-slate-800 text-slate-500 border-slate-700";
 
   return (
-    <div className="flex items-center justify-between p-4 bg-slate-950/40 rounded-2xl border border-slate-800/50">
-      <span className="text-[10px] font-black uppercase text-slate-500 tracking-widest">{label}</span>
-      <div className="flex items-center gap-4">
-        <span className={`px-2 py-0.5 rounded-md text-[8px] font-black uppercase ${badgeColor}`}>
+    <div className="flex items-center justify-between p-3.5 bg-slate-950/60 rounded-xl border border-slate-800/40">
+      <div className="flex flex-col">
+        <span className="text-[8px] font-black uppercase text-slate-600 tracking-wider mb-1">{label} Result</span>
+        <span className={`w-fit px-1.5 py-0.5 rounded border text-[7px] font-black uppercase tracking-tighter ${badgeColor}`}>
           {result.status}
         </span>
-        <span className={`text-sm font-black tabular-nums ${statusColor}`}>
+      </div>
+      <div className="text-right">
+        <span className={`text-base font-black tabular-nums block leading-tight ${profitColor}`}>
           {result.netProfit > 0 ? '+' : ''}${result.netProfit.toFixed(1)}
         </span>
+        <span className="text-[7px] font-black uppercase text-slate-700 tracking-widest">Yield</span>
       </div>
     </div>
   );
 };
 
 const ScoreControl: React.FC<{ label: string; score: number; setScore: (n: number) => void }> = ({ label, score, setScore }) => (
-  <div className="flex-1 flex flex-col items-center gap-4">
-    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{label}</span>
-    <div className="flex flex-col gap-2 w-full max-w-[100px]">
-      <button onClick={() => setScore(score + 1)} className="py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl shadow-lg font-black text-xl transition-all active:scale-90">+</button>
-      <div className="text-4xl font-black py-4 bg-slate-950/50 rounded-2xl border border-slate-800 text-center tabular-nums">{score}</div>
-      <button onClick={() => setScore(Math.max(0, score - 1))} className="py-3 bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-2xl font-black text-xl transition-all active:scale-90">-</button>
+  <div className="flex-1 flex flex-col items-center gap-3">
+    <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">{label}</span>
+    <div className="flex items-center gap-2 w-full justify-center">
+      <button onClick={() => setScore(Math.max(0, score - 1))} className="w-8 h-8 flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-slate-400 rounded-lg font-black transition-all active:scale-90">-</button>
+      <div className="text-3xl font-black tabular-nums w-12 text-center text-white">{score}</div>
+      <button onClick={() => setScore(score + 1)} className="w-8 h-8 flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg shadow-lg font-black transition-all active:scale-90">+</button>
     </div>
   </div>
 );
 
 const InputGroup: React.FC<{ label: string; value: number; onChange: (n: number) => void; step?: number }> = ({ label, value, onChange, step = 1 }) => (
-  <div className="space-y-3">
-    <label className="text-[10px] font-black text-slate-500 uppercase px-2">{label}</label>
+  <div className="space-y-2">
+    <label className="text-[9px] font-black text-slate-500 uppercase px-1 tracking-widest">{label}</label>
     <input 
       type="number" step={step} value={value} 
       onChange={e => onChange(Number(e.target.value))} 
-      className="w-full bg-slate-950/50 border border-slate-800 rounded-2xl px-5 py-4 font-black text-indigo-400 outline-none focus:border-indigo-500 transition-all text-center text-lg"
+      className="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 font-black text-indigo-400 outline-none focus:border-indigo-600 transition-all text-center text-sm"
     />
   </div>
 );
 
 const StatusLegend: React.FC<{ color: string; label: string }> = ({ color, label }) => (
-  <div className="flex items-center gap-2">
-    <div className={`w-2 h-2 bg-${color}-500 rounded-full`}></div>
-    <span className="text-[9px] font-black uppercase text-slate-500 tracking-widest">{label}</span>
+  <div className="flex items-center gap-1.5">
+    <div className={`w-1.5 h-1.5 bg-${color}-500 rounded-full shadow-sm shadow-${color}-500/50`}></div>
+    <span className="text-[8px] font-black uppercase text-slate-500 tracking-widest">{label}</span>
   </div>
 );
 
